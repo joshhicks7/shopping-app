@@ -1,0 +1,15 @@
+.cart
+{
+	flex-wrap: wrap;
+	padding:  50px;
+}
+.cart_body
+{
+	display: flex;
+}
+.cart_items
+{
+	padding: 10px;
+	margin: auto;
+	width: 100%;
+}

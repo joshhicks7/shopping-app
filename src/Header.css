@@ -1,0 +1,40 @@
+.header
+{
+	display:  flex;
+	background-color: #30382a;
+	justify-content:space-between;
+	position:sticky;
+	top: 0px;
+	z-index: 100;
+	color: white;
+}
+
+.header__right
+{
+	display: flex;
+	justify-content: center;
+}
+
+.header__right > h5
+{
+
+}
+.header_middle
+{
+	display: flex;
+	flex: 2;
+	justify-content: center;
+}
+
+sup
+{	
+	color: white;
+	text-decoration: none;
+}
+
+Link 
+{
+	text-decoration: none;
+	color: white;
+	background-color: white;
+}
