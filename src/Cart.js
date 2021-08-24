@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Cart.css'
 import CartItem from './CartItem'
 
-function Cart({OnAddToCart, items})
+function Cart({OnAddToCart, items, cart})
 {
 		return (
 			<div className = "cart">
@@ -13,15 +13,15 @@ function Cart({OnAddToCart, items})
 					<div className="cart_items">
 					{console.log(items)}	
 					 	{	
-					 	Object.keys(items).map((item, index) =>
+					 	Object.keys(cart).map((id, index) =>
 							(<CartItem
 								OnAddToCart = {OnAddToCart}
-								id = {item}
-								key = {item}
-								image = {items[item].imageURL}
-								cName = {items[item].name}
-								amount = {items[item].amount}
-								price = {items[item].price}
+								id = {id}
+								key = {id}
+								image = {items[id].imageURL}
+								cName = {items[id].name}
+								amount = {cart[id]}
+								price = {items[id].price}
 								/>
 							))}
 					 	
@@ -41,9 +41,9 @@ function Cart({OnAddToCart, items})
 		function getTotalCosts()
 		{
 			let sum = 0;
-			Object.keys(items).forEach(x => 
+			Object.keys(cart).forEach(x => 
 			{
-				sum += items[x].amount * items[x].price;
+				sum += cart[x] * items[x].price;
 			})
 			return sum;
 		}
@@ -51,7 +51,7 @@ function Cart({OnAddToCart, items})
 	  function getItemAmount()
 	  {
 	    let sum = 0;
-	    Object.keys(items).forEach(x=>{sum += items[x].amount});
+	    Object.keys(cart).forEach(x=>{sum += cart[x]});
 	    return sum;
 	  } 		
 }

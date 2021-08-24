@@ -10,7 +10,18 @@ function CartItem({OnAddToCart, id, image, cName, amount, price})
 				</div>							
 					<p><b>{cName}</b></p>
 					<p>$ {round(price, 2)}</p>
-					<p>{amount}</p>
+					<div className = "cartAmount">
+						{
+							OnAddToCart&&
+							<button onClick = {()=>OnAddToCart(id,-1)}>-</button>
+						}
+						<p>{amount}</p>
+						{
+							OnAddToCart&&
+							<button onClick = {()=>OnAddToCart(id,1)}>+</button>
+						}
+					</div>
+					
 			</div>
 		);
 }

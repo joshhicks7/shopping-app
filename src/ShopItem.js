@@ -11,7 +11,7 @@ function ShopItem({OnAddToCart, id, name, imageURL, price})
 				<div className="shop_item_bottom">
 					<h2>{name}</h2>
 					<p>${price}</p>
-					<button onClick = {()=>OnAddToCart(id)}>
+					<button onClick = {()=>OnAddToCart(id,1)}>
 						<p>ADD TO CART</p>
 						<AddShoppingCartIcon/>
 					</button>				

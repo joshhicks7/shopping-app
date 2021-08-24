@@ -11,7 +11,7 @@ import {
   Link
 } from "react-router-dom"
 
-let items = {};
+let items = getItems();
 export default class App extends React.Component
 {
 
@@ -29,23 +29,31 @@ export default class App extends React.Component
       let cart = this.state.cart;
       if(cart[id])
       {
-        cart[id].amount += amount;
-        console.log("exist");
+        if(cart[id] + amount <= 0)
+        {
+          delete cart[id];
+        }
+        else
+        {
+          cart[id] += amount;
+          console.log("exist");
+        }       
+
       }
       else
       {
-        cart[id] = this.items[id];
+        cart[id] = 1;
         console.log("not exist");
       }
       this.setState({cart:cart});
-      console.log(this.state.cart);
+      console.log(cart);
     }
   
 
   getItemAmount()
   {
     let sum = 0;
-    Object.keys(this.state.cart).forEach(x=>{sum += this.state.cart[x].amount});
+    Object.keys(this.state.cart).forEach(x=>{sum += this.state.cart[x]});
     return sum;
   }
 
@@ -61,7 +69,7 @@ export default class App extends React.Component
               <Shop OnAddToCart = {this.AddItem} items={this.items}/>
             </Route>
             <Route exact path = "/cart">
-               <Cart items={this.state.cart}/>
+               <Cart OnAddToCart = {this.AddItem} cart={this.state.cart} items = {items}/>
             </Route>    
           </Switch>                
           </div>
@@ -75,23 +83,23 @@ function getItems()
 {
     let items = {};
     let j = 0;
-    let i = new Item(j++, "Butterfly", round(Math.random() * 100,2), "https://png.pngtree.com/png-clipart/20210313/ourlarge/pngtree-pink-butterfly-flying-tail-light-effect-png-image_3060758.jpg",1);
+    let i = new Item(j++, "Butterfly", round(Math.random() * 100,2), "https://png.pngtree.com/png-clipart/20210313/ourlarge/pngtree-pink-butterfly-flying-tail-light-effect-png-image_3060758.jpg");
     items[i.id] = i;
-    i = new Item(j++, "Airplane", round(Math.random() * 100,2), "https://png.pngtree.com/png-clipart/20190415/ourlarge/pngtree-3d-rendering-of-airplane-png-image_942526.jpg", 1);
+    i = new Item(j++, "Airplane", round(Math.random() * 100,2), "https://png.pngtree.com/png-clipart/20190415/ourlarge/pngtree-3d-rendering-of-airplane-png-image_942526.jpg");
     items[i.id] = i;
-    i = new Item(j++, "Frosty", round(Math.random() * 100,2), "https://png.pngtree.com/png-vector/20190904/ourlarge/pngtree-winter-ski-snow-ball-santa-claus-christmas-png-image_1724153.jpg", 1);
+    i = new Item(j++, "Frosty", round(Math.random() * 100,2), "https://png.pngtree.com/png-vector/20190904/ourlarge/pngtree-winter-ski-snow-ball-santa-claus-christmas-png-image_1724153.jpg");
     items[i.id] = i;
-    i = new Item(j++, "Ship", round(Math.random() * 100,2), "https://png.pngtree.com/element_our/20200610/ourlarge/pngtree-sailing-ship-yacht-image_2249188.jpg", 1);
+    i = new Item(j++, "Ship", round(Math.random() * 100,2), "https://png.pngtree.com/element_our/20200610/ourlarge/pngtree-sailing-ship-yacht-image_2249188.jpg");
     items[i.id] = i;
-    i = new Item(j++, "Fruit", round(Math.random() * 100,2), "https://png.pngtree.com/png-vector/20190403/ourlarge/pngtree-fruits-tropical-png-image_890931.jpg", 1);
+    i = new Item(j++, "Fruit", round(Math.random() * 100,2), "https://png.pngtree.com/png-vector/20190403/ourlarge/pngtree-fruits-tropical-png-image_890931.jpg");
     items[i.id] = i;
-    i = new Item(j++, "Cat", round(Math.random() * 100,2), "https://png.pngtree.com/png-vector/20201229/ourlarge/pngtree-a-british-short-blue-and-white-cat-png-image_2654518.jpg", 1);
+    i = new Item(j++, "Cat", round(Math.random() * 100,2), "https://png.pngtree.com/png-vector/20201229/ourlarge/pngtree-a-british-short-blue-and-white-cat-png-image_2654518.jpg");
     items[i.id] = i;
-    i = new Item(j++, "Shrek", round(Math.random() * 100,2), "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmumUKOWYPP8BxPDJc954EVPscLWBL9oqawA&usqp=CAU", 1);
+    i = new Item(j++, "Shrek", round(Math.random() * 100,2), "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmumUKOWYPP8BxPDJc954EVPscLWBL9oqawA&usqp=CAU");
     items[i.id] = i;
-    i = new Item(j++, "House", round(Math.random() * 1500,2), "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf0i2dMjrUDHJ-mTrQOEQn7IrF9jHsMoIBjA&usqp=CAU", 1);
+    i = new Item(j++, "House", round(Math.random() * 1500,2), "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf0i2dMjrUDHJ-mTrQOEQn7IrF9jHsMoIBjA&usqp=CAU");
     items[i.id] = i;
-    i = new Item(j++, "Shorts", round(Math.random() * 100,2), "https://png.pngtree.com/png-clipart/20210628/ourlarge/pngtree-cartoon-summer-blue-shorts-png-image_3432364.jpg",1);
+    i = new Item(j++, "Shorts", round(Math.random() * 100,2), "https://png.pngtree.com/png-clipart/20210628/ourlarge/pngtree-cartoon-summer-blue-shorts-png-image_3432364.jpg");
     items[i.id] = i;
 
     return items;
@@ -103,13 +111,12 @@ function round(number, places)
   return Math.round(number * Math.pow(10, places)) / Math.pow(10,places);
 }
 
-function Item(id, name, price, imageURL, amount)
+function Item(id, name, price, imageURL)
 {
     this.id = id;
     this.name = name;
     this.price = price;
     this.imageURL = imageURL;
-    this.amount = amount;
 }
 
 
